@@ -1,9 +1,15 @@
 package pl.com.britenet.kta.entity.user;
 
 import lombok.Data;
-import pl.com.britenet.kta.entity.BaseEntity;
 
 @Data
-public class Permission extends BaseEntity {
+public class Permission {
     private String description;
+
+    public Permission() {
+    }
+
+    public Permission(String description) {
+        this.description = description;
+    }
 }

@@ -1,21 +1,31 @@
 package pl.com.britenet.kta.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import pl.com.britenet.kta.entity.user.RolaEnum;
-import pl.com.britenet.kta.entity.user.Role;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 import pl.com.britenet.kta.entity.user.User;
+import pl.com.britenet.kta.service.UserService;
 
-//@RestController(value = "/test")
+import java.util.List;
+
+@RestController
+@RequestMapping("users")
+@AllArgsConstructor
 public class UserController {
+
+    private final UserService userService;
+
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.findAll();
+    }
+
+    @GetMapping(value = "/{id}")
+    public User getUser(@PathVariable String id) {
+        return userService.findOne(id);
+    }
 
     @PostMapping
     public User addUser(@RequestBody User user) {
-        System.out.println(user);
-        User user1 = new User();
-        Role role = new Role();
-        role.setName(RolaEnum.ADMINISTRATOR);
-        user1.setRole(role);
-        return user1;
+        return userService.add(user);
     }
 }

@@ -1,13 +1,25 @@
 package pl.com.britenet.kta.entity.user;
 
 import lombok.Data;
-import pl.com.britenet.kta.entity.BaseEntity;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
 
 import java.util.Set;
 
 @Data
-public class Role extends BaseEntity {
+@ToString
+public class Role {
 
-    private RolaEnum name; // ADMINISTRATOR, ZARZAD, KSIEGOWA, TERAPEUTA, CZLONEK, WOLONTARIUSZ
+    @Id
+    private String id;
+    private RoleType roleType; // ADMINISTRATOR, ZARZAD, KSIEGOWA, TERAPEUTA, CZLONEK, WOLONTARIUSZ
     private Set<Permission> permissions;
+
+    public Role() {
+    }
+
+    public Role(RoleType roleType, Set<Permission> permissions) {
+        this.roleType = roleType;
+        this.permissions = permissions;
+    }
 }

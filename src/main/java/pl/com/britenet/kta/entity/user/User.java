@@ -1,17 +1,26 @@
 package pl.com.britenet.kta.entity.user;
 
-import lombok.Data;
+import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import pl.com.britenet.kta.entity.BaseEntity;
-import pl.com.britenet.kta.entity.user.Role;
+
+import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 @Document
-public class User extends BaseEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class User {
 
+    @Id
+    private String id;
     private String login;
     private String password;
     private String email;
     private String phoneNumber;
+
+    @NotNull
     private Role role;
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.britenet.kta.domain.User;
 import pl.com.britenet.kta.dtos.UserDto;
+import pl.com.britenet.kta.exceptions.BadRequestException;
 import pl.com.britenet.kta.factories.UserFactory;
 import pl.com.britenet.kta.repositories.UserRepository;
 
@@ -32,5 +33,14 @@ public class UserService {
     @Transactional
     public List<User> listAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Transactional
+    public void deleteUserById(String id) {
+        User user = userRepository.findOne(id);
+        if(user ==  null)
+            throw new BadRequestException("Nie znaleziono uzytkownika o podanym id");
+        else
+            userRepository.delete(id);
     }
 }

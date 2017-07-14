@@ -1,5 +1,7 @@
 package pl.com.britenet.kta.dtos;
 
+import pl.com.britenet.kta.exceptions.BadRequestException;
+
 /**
  * Created by Britenet on 2017-07-13.
  */
@@ -74,6 +76,18 @@ public class UserDto {
 
 
     public void validate() {
-        // TODO: 2017-07-13 walidacja dtosa
+        if (login == null || login.trim().isEmpty())
+            throw new BadRequestException("Login nie moze byc pusty");
+        if (password == null || password.trim().isEmpty())
+            throw new BadRequestException("Haslo nie moze byc puste");
+        if (firstName == null || firstName.trim().isEmpty())
+            throw new BadRequestException("Imie nie moze byc puste");
+        if (lastName == null || lastName.trim().isEmpty())
+            throw new BadRequestException("Nazwisko nie moze byc puste");
+        if (email == null || email.trim().isEmpty())
+            throw new BadRequestException("Email nie moze byc pusty");
+        if (phoneNumber == null || phoneNumber.trim().isEmpty())
+            throw new BadRequestException("Numer telefonu nie moze byc pusty");
+
     }
 }

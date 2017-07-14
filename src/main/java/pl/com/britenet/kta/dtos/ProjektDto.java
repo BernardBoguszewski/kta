@@ -1,5 +1,7 @@
 package pl.com.britenet.kta.dtos;
 
+import pl.com.britenet.kta.exceptions.BadRequestException;
+
 /**
  * Created by Britenet on 2017-07-13.
  */
@@ -53,6 +55,13 @@ public class ProjektDto {
     }
 
     public void validate(){
-        // TODO: 2017-07-13
+        if (nazwa == null || nazwa.trim().isEmpty())
+            throw new BadRequestException("Nazwa nie moze byc pusta");
+        if (opis == null || opis.trim().isEmpty())
+            throw new BadRequestException("Opis nie moze byc pusty");
+        if(!dataUtworzenia.matches("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"))
+            throw new BadRequestException("Niepoprawna data utworzenia");
+        if(!dataZamkniecia.matches("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"))
+            throw new BadRequestException("Niepoprawna data zamkniecia");
     }
 }

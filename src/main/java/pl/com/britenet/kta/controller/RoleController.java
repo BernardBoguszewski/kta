@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.com.britenet.kta.entity.user.Role;
+import pl.com.britenet.kta.dto.user.RoleDto;
 import pl.com.britenet.kta.service.RoleService;
 
 import java.util.List;
@@ -18,12 +18,12 @@ public class RoleController {
     private final RoleService roleService;
 
     @GetMapping
-    public List<Role> getRoles() {
+    public List<RoleDto> getRoles() {
         return roleService.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public Role getRole(@PathVariable String id) {
+    public RoleDto getRole(@PathVariable String id) {
         return roleService.findOne(id);
     }
 }

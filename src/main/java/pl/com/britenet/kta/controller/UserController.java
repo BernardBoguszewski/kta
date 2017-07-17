@@ -2,7 +2,7 @@ package pl.com.britenet.kta.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pl.com.britenet.kta.entity.user.User;
+import pl.com.britenet.kta.dto.user.UserDto;
 import pl.com.britenet.kta.service.UserService;
 
 import java.util.List;
@@ -15,17 +15,17 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<UserDto> getUsers() {
         return userService.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public User getUser(@PathVariable String id) {
+    public UserDto getUser(@PathVariable String id) {
         return userService.findOne(id);
     }
 
     @PostMapping
-    public User addUser(@RequestBody User user) {
-        return userService.add(user);
+    public UserDto addUser(@RequestBody UserDto userDto) {
+        return userService.add(userDto);
     }
 }

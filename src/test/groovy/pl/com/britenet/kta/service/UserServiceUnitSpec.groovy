@@ -1,6 +1,7 @@
 package pl.com.britenet.kta.service
 
-import pl.com.britenet.kta.entity.user.Permission
+import pl.com.britenet.kta.dto.user.RoleDto
+import pl.com.britenet.kta.dto.user.UserDto
 import pl.com.britenet.kta.entity.user.Role
 import pl.com.britenet.kta.entity.user.RoleType
 import pl.com.britenet.kta.entity.user.User
@@ -28,17 +29,16 @@ class UserServiceUnitSpec extends Specification {
         result.size() == expectedResult
 
         where:
-        users                    || expectedResult
-        [new User()]             || 1
-        [new User(), new User()] || 2
+        users                                                                                                                                                                                                                             || expectedResult
+        [new User("id1", "login", "password", "email", "phoneNumber", new Role("roleId1", RoleType.ADMINISTRATOR, null))]                                                                                                                 || 1
+        [new User("id1", "login", "password", "email", "phoneNumber", new Role("roleId1", RoleType.ADMINISTRATOR, null)), new User("id2", "login", "password", "email", "phoneNumber", new Role("roleId2", RoleType.WOLONTARIUSZ, null))] || 2
     }
 
     @Unroll("[#iterationCount]#featureName")
     def "should find user"() {
         given:
         def id = "id"
-        def permissions = [new Permission(description: "addUser")] as Set
-        def role = new Role(id: "roleId", roleType: RoleType.ADMINISTRATOR, permissions: permissions)
+        def role = new Role("roleId", RoleType.ADMINISTRATOR, [] as Set)
         def user = new User(id, "login", "password", "email", "phoneNumber", role)
 
         when:
@@ -51,23 +51,23 @@ class UserServiceUnitSpec extends Specification {
         result.id == user.id
         result.login == user.login
         result.password == user.password
-        result.role == user.role
-        result.role.permissions == user.role.permissions
+        result.role.id == user.role.id
+        result.role.roleType == user.role.roleType
     }
 
     @Unroll("[#iterationCount]#featureName")
     def "should add user"() {
         given:
         def id = "id"
-        def role = new Role(id: "roleId", roleType: RoleType.ADMINISTRATOR)
-        def newUser = new User(null, "login", "password", "email", "phoneNumber", role)
+        def roleDto = new RoleDto(id: "roleId", roleType: RoleType.ADMINISTRATOR)
+        def userDto = new UserDto(null, "login", "password", "email", "phoneNumber", roleDto)
 
         when:
-        def result = userResource.add(newUser)
+        def result = userResource.add(userDto)
 
         then:
-        1 * roleRepository.findOne(newUser.role.id) >> role
-        1 * userRepository.save(newUser) >> { User user ->
+        1 * roleRepository.findOne(userDto.role.id) >> new Role("roleId", RoleType.ADMINISTRATOR, null)
+        1 * userRepository.save(_ as User) >> { User user ->
             user.id = id
             user
         }
@@ -77,8 +77,8 @@ class UserServiceUnitSpec extends Specification {
     @Unroll("[#iterationCount]#featureName")
     def "should throw exception during adding user"() {
         given:
-        def newUser = new User(null, "login", "password",
-                "email", "phoneNumber", userRole)
+        def newUser = new UserDto(null, "login", "password",
+                "email", "phoneNumber", roleDto)
         when:
         userResource.add(newUser)
 
@@ -89,9 +89,9 @@ class UserServiceUnitSpec extends Specification {
         exception.message == expectedMessage
 
         where:
-        userRole                                             | a | findedRole                                               || expectedMessage
-        new Role(id: null, roleType: RoleType.ADMINISTRATOR) | 0 | null                                                     || "nie ma takiej roli"
-        new Role(id: "roleId", roleType: RoleType.KSIEGOWA)  | 1 | null                                                     || "nie ma takiej roli"
-        new Role(id: "roleId", roleType: RoleType.KSIEGOWA)  | 1 | new Role(id: "roleId", roleType: RoleType.ADMINISTRATOR) || "nie ma takiej roli"
+        roleDto                                   | a | findedRole                                       || expectedMessage
+        new RoleDto(null, RoleType.ADMINISTRATOR) | 0 | null                                             || "nie ma takiej roli"
+        new RoleDto("roleId", RoleType.KSIEGOWA)  | 1 | null                                             || "nie ma takiej roli"
+        new RoleDto("roleId", RoleType.KSIEGOWA)  | 1 | new Role("roleId", RoleType.ADMINISTRATOR, null) || "nie ma takiej roli"
     }
 }

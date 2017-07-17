@@ -27,19 +27,15 @@ public class KtaApplication {
         return args -> {
             ArrayList<User> users = new ArrayList<>();
 
-            Role admin = new Role();
-            admin.setRoleType(RoleType.ADMINISTRATOR);
             Set<Permission> es = new HashSet<>();
             es.add(new Permission("read"));
             es.add(new Permission("write"));
             es.add(new Permission("update"));
-            admin.setPermissions(es);
+            Role admin = new Role(null, RoleType.ADMINISTRATOR, es);
 
-            Role terapueuta = new Role();
-            terapueuta.setRoleType(RoleType.TERAPEUTA);
             Set<Permission> es1 = new HashSet<>();
             es1.add(new Permission("read"));
-            terapueuta.setPermissions(es1);
+            Role terapueuta = new Role(null, RoleType.TERAPEUTA, es1);
 
             roleRepository.save(terapueuta);
             roleRepository.save(admin);

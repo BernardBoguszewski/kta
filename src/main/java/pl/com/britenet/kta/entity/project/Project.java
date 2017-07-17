@@ -1,13 +1,18 @@
 package pl.com.britenet.kta.entity.project;
 
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import pl.com.britenet.kta.entity.crm.Beneficiary;
 import pl.com.britenet.kta.entity.note.Note;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
 //podobne do jiry
+@Data
+@Builder
 public class Project {
 
     @Id
@@ -15,8 +20,8 @@ public class Project {
     private String name;
     private String description;
 
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     private ProjectStatus status;
     private Note note;

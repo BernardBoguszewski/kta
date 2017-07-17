@@ -1,8 +1,8 @@
 package pl.com.britenet.kta.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import pl.com.britenet.kta.domain.Projekt;
-import pl.com.britenet.kta.dtos.ProjektDto;
+import pl.com.britenet.kta.dtos.ProjectDto;
+import pl.com.britenet.kta.entity.project.Project;
 import pl.com.britenet.kta.services.ProjektService;
 
 import java.util.List;
@@ -12,28 +12,27 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/projects")
-public class ProjektController {
+public class ProjectController {
 
     private ProjektService projektService;
 
-    public ProjektController(ProjektService projektService) {
+    public ProjectController(ProjektService projektService) {
         this.projektService = projektService;
     }
 
     @PostMapping
-    public void createProject(@RequestBody ProjektDto projektDto){
-        projektDto.validate();
-        projektService.createProject(projektDto);
+    public void createProject(@RequestBody ProjectDto projectDto){
+        projektService.createProject(projectDto);
     }
 
     @GetMapping
-    public List<Projekt> getProjekt(){
+    public List<Project> listAllProjects(){
         return projektService.getAllProjects();
     }
 
     @GetMapping("/{id}")
-    public Projekt getProjektById(@PathVariable String id){
-        return projektService.getProjekt(id);
+    public Project getProjectById(@PathVariable String id){
+        return projektService.getProject(id);
     }
 
 
@@ -43,8 +42,8 @@ public class ProjektController {
     }
 
     @PutMapping("/{id}")
-    public void updateProject(@PathVariable String id, @RequestBody ProjektDto projektDto){
-        projektService.updateProject(id, projektDto);
+    public void updateProject(@PathVariable String id, @RequestBody ProjectDto projectDto){
+        projektService.updateProject(id, projectDto);
     }
 
 }

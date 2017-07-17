@@ -2,7 +2,7 @@ package pl.com.britenet.kta.factories;
 
 import org.springframework.stereotype.Component;
 import pl.com.britenet.kta.domain.Projekt;
-import pl.com.britenet.kta.dtos.ProjektDto;
+import pl.com.britenet.kta.dtos.ProjectDto;
 
 import java.time.LocalDate;
 
@@ -11,9 +11,9 @@ import java.time.LocalDate;
  */
 @Component
 public class ProjectFactory {
-    public Projekt create(ProjektDto projektDto) {
-        LocalDate startDate = LocalDate.parse(projektDto.getDataUtworzenia());
-        LocalDate endDate = LocalDate.parse(projektDto.getDataZamkniecia());
-        return new Projekt(projektDto.getNazwa(), projektDto.getOpis(), startDate, endDate);
+    public Projekt create(ProjectDto projectDto) {
+        LocalDate startDate = LocalDate.parse(projectDto.getDataUtworzenia());
+        LocalDate endDate = LocalDate.parse(projectDto.getDataZamkniecia());
+        return new Projekt(projectDto.getNazwa(), projectDto.getOpis(), startDate, endDate);
     }
 }

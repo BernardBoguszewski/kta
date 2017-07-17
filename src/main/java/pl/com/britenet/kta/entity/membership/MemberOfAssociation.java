@@ -17,7 +17,7 @@ public class MemberOfAssociation {
     private String nip;
     private String regon;
 
-    private Address address;
+    private String  address;
     private String email;
     private String phoneNumber;
 

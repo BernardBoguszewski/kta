@@ -8,6 +8,7 @@ import pl.com.britenet.kta.exceptions.BadRequestException;
 import pl.com.britenet.kta.factories.ProjectFactory;
 import pl.com.britenet.kta.repositories.ProjektRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -42,5 +43,30 @@ public class ProjektService {
             throw new BadRequestException("Projekt o podanym id nie istnieje");
         else
             projektRepository.delete(id);
+    }
+
+    @Transactional
+    public Projekt getProjekt(String id) {
+        Projekt projekt = projektRepository.findOne(id);
+        if(projekt == null)
+            throw new BadRequestException("Projekt o podanym id nie istnieje");
+        else
+            return projekt;
+    }
+
+    @Transactional
+    public void updateProject(String id, ProjektDto projektDto) {
+        Projekt projekt = projektRepository.findOne(id);
+        if(projekt == null)
+            throw new BadRequestException("Projekt o podanym id nie istnieje");
+        else {
+            LocalDate startDate = LocalDate.parse(projektDto.getDataUtworzenia());
+            LocalDate endDate = LocalDate.parse(projektDto.getDataZamkniecia());
+            projekt.setNazwa(projektDto.getNazwa());
+            projekt.setOpis(projektDto.getOpis());
+            projekt.setDataUtworzenia(startDate);
+            projekt.setDataZamkniecia(endDate);
+            projektRepository.save(projekt);
+        }
     }
 }

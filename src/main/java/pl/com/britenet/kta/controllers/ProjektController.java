@@ -31,9 +31,20 @@ public class ProjektController {
         return projektService.getAllProjects();
     }
 
+    @GetMapping("/{id}")
+    public Projekt getProjektById(@PathVariable String id){
+        return projektService.getProjekt(id);
+    }
+
+
     @DeleteMapping("/{id}")
     public void deleteProjectById(@PathVariable String id){
         projektService.deleteProjectById(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updateProject(@PathVariable String id, @RequestBody ProjektDto projektDto){
+        projektService.updateProject(id, projektDto);
     }
 
 }

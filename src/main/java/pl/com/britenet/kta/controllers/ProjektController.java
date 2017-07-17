@@ -31,4 +31,9 @@ public class ProjektController {
         return projektService.getAllProjects();
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteProjectById(@PathVariable String id){
+        projektService.deleteProjectById(id);
+    }
+
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.britenet.kta.domain.Projekt;
 import pl.com.britenet.kta.dtos.ProjektDto;
+import pl.com.britenet.kta.exceptions.BadRequestException;
 import pl.com.britenet.kta.factories.ProjectFactory;
 import pl.com.britenet.kta.repositories.ProjektRepository;
 
@@ -33,5 +34,13 @@ public class ProjektService {
     @Transactional
     public List<Projekt> getAllProjects() {
         return projektRepository.findAll();
+    }
+
+    public void deleteProjectById(String id) {
+        Projekt projekt = projektRepository.findOne(id);
+        if(projekt == null)
+            throw new BadRequestException("Projekt o podanym id nie istnieje");
+        else
+            projektRepository.delete(id);
     }
 }

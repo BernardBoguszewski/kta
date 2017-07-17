@@ -11,14 +11,14 @@ import java.util.Date;
 public class Beneficjent extends Contact {
 
 
-    private Date birthDate;
+    private LocalDate birthDate;
     private Boolean disabled;
     private LocalDate dataWystawieniaZaswiadczenia;
     private LocalDate dataWaznosciZaswiadczenia;
     private  Notatka notatka;
     private RodzajBeneficjenta rodzajBeneficjenta;
 
-    public Beneficjent(Date birthDate, Boolean disabled, LocalDate dataWystawieniaZaswiadczenia, LocalDate dataWaznosciZaswiadczenia, Notatka notatka) {
+    public Beneficjent(LocalDate birthDate, Boolean disabled, LocalDate dataWystawieniaZaswiadczenia, LocalDate dataWaznosciZaswiadczenia, Notatka notatka) {
         this.birthDate = birthDate;
         this.disabled = disabled;
         this.dataWystawieniaZaswiadczenia = dataWystawieniaZaswiadczenia;
@@ -27,11 +27,11 @@ public class Beneficjent extends Contact {
     }
 
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

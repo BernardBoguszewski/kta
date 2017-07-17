@@ -25,4 +25,13 @@ public class Resolution {
 
     private Resolution previousResultion;
     private MemberOfAssociation memberOfAssociation; //????
+
+    public Resolution(String title, String description, String numeration, LocalDate date, Resolution previousResultion, MemberOfAssociation memberOfAssociation) {
+        this.title = title;
+        this.description = description;
+        this.numeration = numeration;
+        this.date = date;
+        this.previousResultion = previousResultion;
+        this.memberOfAssociation = memberOfAssociation;
+    }
 }

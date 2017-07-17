@@ -1,4 +1,4 @@
-package pl.com.britenet.kta.dto.user;
+package pl.com.britenet.kta.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

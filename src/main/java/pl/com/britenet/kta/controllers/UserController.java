@@ -1,4 +1,4 @@
-package pl.com.britenet.kta.controller;
+package pl.com.britenet.kta.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +8,7 @@ import pl.com.britenet.kta.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
 

@@ -9,7 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import pl.com.britenet.kta.dto.user.RoleDto;
+import pl.com.britenet.kta.dtos.RoleDto;
 import pl.com.britenet.kta.dto.user.UserDto;
 import pl.com.britenet.kta.entity.user.RoleType;
 

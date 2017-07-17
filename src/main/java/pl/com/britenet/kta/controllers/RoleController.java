@@ -1,11 +1,11 @@
-package pl.com.britenet.kta.controller;
+package pl.com.britenet.kta.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.com.britenet.kta.dto.user.RoleDto;
+import pl.com.britenet.kta.dtos.RoleDto;
 import pl.com.britenet.kta.service.RoleService;
 
 import java.util.List;

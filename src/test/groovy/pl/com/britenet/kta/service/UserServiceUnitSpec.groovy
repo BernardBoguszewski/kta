@@ -1,11 +1,11 @@
 package pl.com.britenet.kta.service
 
-import pl.com.britenet.kta.dto.user.RoleDto
+import pl.com.britenet.kta.dtos.RoleDto
 import pl.com.britenet.kta.dto.user.UserDto
 import pl.com.britenet.kta.entity.user.Role
 import pl.com.britenet.kta.entity.user.RoleType
 import pl.com.britenet.kta.entity.user.User
-import pl.com.britenet.kta.repository.RoleRepository
+import pl.com.britenet.kta.repositories.RoleRepository
 import pl.com.britenet.kta.repository.UserRepository
 import spock.lang.Specification
 import spock.lang.Unroll

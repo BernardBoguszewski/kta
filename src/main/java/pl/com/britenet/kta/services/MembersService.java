@@ -10,7 +10,7 @@ import pl.com.britenet.kta.repositories.MemberOfAssociationRepository;
  */
 @Service
 @AllArgsConstructor
-public class MemberOfAssociationService {
+public class MembersService {
 
     private MemberOfAssociationRepository memberOfAssociationRepository;
 

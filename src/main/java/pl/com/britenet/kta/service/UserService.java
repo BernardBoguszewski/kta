@@ -2,12 +2,12 @@ package pl.com.britenet.kta.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.com.britenet.kta.dto.user.RoleDto;
 import pl.com.britenet.kta.dto.user.UserDto;
+import pl.com.britenet.kta.dtos.RoleDto;
 import pl.com.britenet.kta.entity.user.Role;
 import pl.com.britenet.kta.entity.user.User;
-import pl.com.britenet.kta.repository.RoleRepository;
-import pl.com.britenet.kta.repository.UserRepository;
+import pl.com.britenet.kta.repositories.RoleRepository;
+import pl.com.britenet.kta.repositories.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +43,7 @@ public class UserService {
         return mapToDto(userRepository.save(user));
     }
 
-    public static User createEntity(UserDto userDto, Role role) {
+    private static User createEntity(UserDto userDto, Role role) {
         return User.builder()
                 .login(userDto.getLogin())
                 .password(userDto.getPassword())
@@ -53,7 +53,7 @@ public class UserService {
                 .build();
     }
 
-    public static UserDto mapToDto(User user) {
+    private static UserDto mapToDto(User user) {
         RoleDto roleDto = Optional.ofNullable(user.getRole()).map(RoleService::mapToDto).orElse(null);
         return UserDto.builder()
                 .id(user.getId())

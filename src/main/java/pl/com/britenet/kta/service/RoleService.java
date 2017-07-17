@@ -2,9 +2,9 @@ package pl.com.britenet.kta.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.com.britenet.kta.dto.user.RoleDto;
+import pl.com.britenet.kta.dtos.RoleDto;
 import pl.com.britenet.kta.entity.user.Role;
-import pl.com.britenet.kta.repository.RoleRepository;
+import pl.com.britenet.kta.repositories.RoleRepository;
 
 import java.util.List;
 import java.util.Optional;

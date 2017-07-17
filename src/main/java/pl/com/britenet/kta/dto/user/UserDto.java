@@ -2,6 +2,7 @@ package pl.com.britenet.kta.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import pl.com.britenet.kta.dtos.RoleDto;
 
 @ToString
 @Getter

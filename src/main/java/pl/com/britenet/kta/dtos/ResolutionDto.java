@@ -14,8 +14,7 @@ public class ResolutionDto {
     private String description;
     private String numeration;
     private String date;
-    private String previousResolutionId;
-    private String memberOfAssociationId;
+
 
 
 }

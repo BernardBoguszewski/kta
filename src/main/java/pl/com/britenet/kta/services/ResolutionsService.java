@@ -29,10 +29,8 @@ public class ResolutionsService {
     @Transactional
     public void createResolution(ResolutionDto resolutionDto) {
         LocalDate date = LocalDate.parse(resolutionDto.getDate());
-        Resolution previousResolution = resolutionRepository.findOne(resolutionDto.getPreviousResolutionId());
-        MemberOfAssociation memberOfAssociation = memberOfAssociationRepository.findOne(resolutionDto.getMemberOfAssociationId());
         Resolution resolution = Resolution.builder().title(resolutionDto.getTitle()).description(resolutionDto.getDescription())
-                .numeration(resolutionDto.getNumeration()).date(date).previousResultion(previousResolution).memberOfAssociation(memberOfAssociation).build();
+                .numeration(resolutionDto.getNumeration()).date(date).build();
         resolutionRepository.save(resolution);
     }
 
@@ -57,14 +55,10 @@ public class ResolutionsService {
             throw new BadRequestException("resolution not found");
         } else {
             LocalDate date = LocalDate.parse(resolutionDto.getDate());
-            Resolution previousResolution = resolutionRepository.findOne(resolutionDto.getPreviousResolutionId());
-            MemberOfAssociation memberOfAssociation = memberOfAssociationRepository.findOne(resolutionDto.getMemberOfAssociationId());
             resolution.setTitle(resolutionDto.getTitle());
             resolution.setDescription(resolutionDto.getDescription());
             resolution.setNumeration(resolutionDto.getNumeration());
             resolution.setDate(date);
-            resolution.setPreviousResultion(previousResolution);
-            resolution.setMemberOfAssociation(memberOfAssociation);
             resolutionRepository.save(resolution);
         }
 

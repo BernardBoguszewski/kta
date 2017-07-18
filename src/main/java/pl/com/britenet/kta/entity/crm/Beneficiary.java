@@ -1,5 +1,6 @@
 package pl.com.britenet.kta.entity.crm;
 
+import pl.com.britenet.kta.entity.note.Note;
 import pl.com.britenet.kta.entity.project.Project;
 
 import java.util.Set;
@@ -21,4 +22,5 @@ public class Beneficiary extends Contact {
     private Set<Project> projects;
     private int amountOfSupportHours; //liczbaGodzinUdzielonegoWsparcia
     private String year; ///rok ???
+    private Note note;
 }

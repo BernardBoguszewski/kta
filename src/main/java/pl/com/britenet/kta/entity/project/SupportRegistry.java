@@ -2,7 +2,7 @@ package pl.com.britenet.kta.entity.project;
 
 import org.springframework.data.annotation.Id;
 import pl.com.britenet.kta.entity.activities.ActivityDictionary;
-import pl.com.britenet.kta.entity.crm.ClientOfAssociation;
+import pl.com.britenet.kta.entity.crm.Client;
 import pl.com.britenet.kta.entity.note.Note;
 
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ public class SupportRegistry {
     //wybieramy ze wszystkich projektów
     private Project project;//czy zwiazane z projektem
 
-    private Set<ClientOfAssociation> participants; //wszyscy z crm
+    private Set<Client> participants; //wszyscy z crm
 
     private int numberOfHours; //domyślnie 1
     private Note note;

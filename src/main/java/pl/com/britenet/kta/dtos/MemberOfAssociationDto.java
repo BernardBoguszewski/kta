@@ -2,6 +2,7 @@ package pl.com.britenet.kta.dtos;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.com.britenet.kta.exceptions.BadRequestException;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -119,5 +120,24 @@ public class MemberOfAssociationDto {
 
     public void setResolutionId(String resolutionId) {
         this.resolutionId = resolutionId;
+    }
+
+    public void validate() {
+        if (name.trim().isEmpty())
+            throw new BadRequestException("Name can not be empty");
+        if (address.trim().isEmpty())
+            throw new BadRequestException("Address can not be empty");
+        if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$"))
+            throw new BadRequestException("Incorrect email format");
+        if (!phoneNumber.matches("^\\d{9}$"))
+            throw new BadRequestException("Incorrect phone number, just use 9 digits, like 123123123");
+        if(!startDate.matches("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"))
+            throw new BadRequestException("Incorrect date format, year-month-day");
+        if(!endDate.matches("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"))
+            throw new BadRequestException("Incorrect date format, year-month-day");
+        if (status.trim().isEmpty())
+            throw new BadRequestException("Status can not be empty");
+        if (memberOfAssociationType.trim().isEmpty())
+            throw new BadRequestException("Member type can not be empty");
     }
 }

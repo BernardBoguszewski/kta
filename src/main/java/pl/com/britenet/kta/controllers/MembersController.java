@@ -22,6 +22,7 @@ public class MembersController {
 
     @PostMapping
     public void createMember(@RequestBody MemberOfAssociationDto memberOfAssociationDto){
+        memberOfAssociationDto.validate();
         membersService.createMember(memberOfAssociationDto);
     }
 
@@ -37,6 +38,7 @@ public class MembersController {
 
     @PutMapping("/{id}")
     public void updateMember(@PathVariable String id, @RequestBody MemberOfAssociationDto dto){
+        dto.validate();
         membersService.updateMember(id, dto);
     }
 

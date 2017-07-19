@@ -1,6 +1,5 @@
 package pl.com.britenet.kta.controllers;
 
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.com.britenet.kta.dtos.MemberOfAssociationDto;
 import pl.com.britenet.kta.entity.membership.MemberOfAssociation;
@@ -29,6 +28,21 @@ public class MembersController {
     @GetMapping
     public List<MemberOfAssociation> listAllMembers(){
         return membersService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public MemberOfAssociation getMember(@PathVariable String id){
+        return membersService.getMember(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updateMember(@PathVariable String id, @RequestBody MemberOfAssociationDto dto){
+        membersService.updateMember(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteMember(@PathVariable String id){
+        membersService.deleteMember(id);
     }
 
 }

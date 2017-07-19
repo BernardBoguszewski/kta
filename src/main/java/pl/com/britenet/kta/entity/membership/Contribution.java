@@ -3,19 +3,57 @@ package pl.com.britenet.kta.entity.membership;
 import org.springframework.data.annotation.Id;
 import pl.com.britenet.kta.entity.Address;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Contribution {
 
     @Id
     private String id;
-    private String name; //członek to nie tylko osoba, ale np. firma lub instytucja, więc to pole musi mieć bardziej ogólną nazwę z możliwością dodatkowego wyboru: Imię, Nazwisko, w przypadku osoby. W przypadku firmy dane jak NIP i  REGON
-    private Address address;
-    private String email;
-    private String phoneNumber;
     private MemberOfAssociation memberOfAssociation;
 
-    private Date dateOfPayment;
-    private ContributionDictionary contributionDictionary;
+    private LocalDate dateOfPayment;
+    //private ContributionDictionary contributionDictionary;
     private String description;
+
+    public Contribution() {
+    }
+
+    public Contribution(MemberOfAssociation memberOfAssociation, LocalDate dateOfPayment, String description) {
+        this.memberOfAssociation = memberOfAssociation;
+        this.dateOfPayment = dateOfPayment;
+        this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public MemberOfAssociation getMemberOfAssociation() {
+        return memberOfAssociation;
+    }
+
+    public void setMemberOfAssociation(MemberOfAssociation memberOfAssociation) {
+        this.memberOfAssociation = memberOfAssociation;
+    }
+
+    public LocalDate getDateOfPayment() {
+        return dateOfPayment;
+    }
+
+    public void setDateOfPayment(LocalDate dateOfPayment) {
+        this.dateOfPayment = dateOfPayment;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

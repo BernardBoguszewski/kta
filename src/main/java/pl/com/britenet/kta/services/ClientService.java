@@ -56,6 +56,7 @@ public class ClientService {
         }
     }
 
+    @Transactional
     public void deleteClient(String id) {
         Client client = clientRepository.findOne(id);
         if (client ==  null)

@@ -1,13 +1,9 @@
 package pl.com.britenet.kta.entity.project;
 
-import lombok.Builder;
-import lombok.Data;
 import org.springframework.data.annotation.Id;
-import pl.com.britenet.kta.entity.crm.Beneficiary;
 import pl.com.britenet.kta.entity.note.Note;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 //podobne do jiry

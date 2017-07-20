@@ -19,14 +19,16 @@ import java.util.List;
 public class ActivitiesService {
 
     private ActivitiesRepository activitiesRepository;
+    private ActivityBuilder activityBuilder;
 
-    public ActivitiesService(ActivitiesRepository activitiesRepository) {
+    public ActivitiesService(ActivitiesRepository activitiesRepository, ActivityBuilder activityBuilder) {
         this.activitiesRepository = activitiesRepository;
+        this.activityBuilder = activityBuilder;
     }
 
     @Transactional
     public void createActivity(ActivityDto activityDto) {
-        Activity activity = ActivityBuilder.create(activityDto);
+        Activity activity = activityBuilder.create(activityDto);
         activitiesRepository.save(activity);
     }
 

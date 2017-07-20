@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.Set;
 
 //podobne do jiry
-@Data
-@Builder
+
+
 public class Project {
 
     @Id
@@ -36,4 +36,99 @@ public class Project {
 //2.12. Dostępu do listy zadań, beneficjentów, Kadry w
 // “Opisie projektu” - połączenie z sekcją Lista osób
 // wpisana w projekty oraz Zadania i realizacja zadań.
+
+
+    public Project() {
+    }
+
+    public Project(String name, String description, LocalDate startDate, LocalDate endDate, ProjectStatus status, Set<Contractor> contractors, Set<Beneficiary> beneficiaries, Set<Task> tasks) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.contractors = contractors;
+        this.beneficiaries = beneficiaries;
+        this.tasks = tasks;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public ProjectStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProjectStatus status) {
+        this.status = status;
+    }
+
+    public Note getNote() {
+        return note;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
+    }
+
+    public Set<Contractor> getContractors() {
+        return contractors;
+    }
+
+    public void setContractors(Set<Contractor> contractors) {
+        this.contractors = contractors;
+    }
+
+    public Set<Beneficiary> getBeneficiaries() {
+        return beneficiaries;
+    }
+
+    public void setBeneficiaries(Set<Beneficiary> beneficiaries) {
+        this.beneficiaries = beneficiaries;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Component
 public class ActivityBuilder {
 
-    public static Activity create(ActivityDto activityDto){
+    public Activity create(ActivityDto activityDto){
         ActivityDictionary activityDictionary = new ActivityDictionary(activityDto.getActivityDictionary());
         LocalDate endDate = LocalDate.parse(activityDto.getEndDate());
         return new Activity(activityDto.getTitle(), activityDto.getDescription(), activityDictionary, activityDto.getContractors(), endDate, activityDto.getAmountOfTime());

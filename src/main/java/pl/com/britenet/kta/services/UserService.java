@@ -1,4 +1,4 @@
-package pl.com.britenet.kta.service;
+package pl.com.britenet.kta.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -21,6 +21,15 @@ public class ActivityDto {
     public ActivityDto() {
     }
 
+    public ActivityDto(String title, String description, String activityDictionary, Set<String> contractors, String endDate, int amountOfTime) {
+        this.title = title;
+        this.description = description;
+        this.activityDictionary = activityDictionary;
+        this.contractors = contractors;
+        this.endDate = endDate;
+        this.amountOfTime = amountOfTime;
+    }
+
     public String getTitle() {
         return title;
     }

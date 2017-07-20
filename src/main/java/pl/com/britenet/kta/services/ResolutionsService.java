@@ -71,14 +71,14 @@ public class ResolutionsService {
 
     @Transactional
     public void deleteResolution(String id) {
-//        Uchwala uchwala = uchwalaRepository.findOne(id);
-//        if(uchwala == null)
-//            throw new BadRequestException("Uchwala o podanym id nie istnieje");
-//        else
-//            uchwalaRepository.delete(id);
+        Resolution resolution = resolutionRepository.findOne(id);
+        if(resolution == null)
+            throw new BadRequestException("Uchwala o podanym id nie istnieje");
+        else
+            resolutionRepository.delete(id);
 
-        Resolution resolution = Optional.ofNullable(resolutionRepository.findOne(id))
-                .orElseThrow(() -> new BadRequestException("Uchwala o podanym id nie istnieje"));
-        resolutionRepository.delete(resolution);
+//        Resolution resolution = Optional.ofNullable(resolutionRepository.findOne(id))
+//                .orElseThrow(() -> new BadRequestException("Uchwala o podanym id nie istnieje"));
+//        resolutionRepository.delete(resolution);
     }
 }

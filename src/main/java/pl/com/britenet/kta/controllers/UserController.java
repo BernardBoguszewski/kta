@@ -3,7 +3,7 @@ package pl.com.britenet.kta.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pl.com.britenet.kta.dto.user.UserDto;
-import pl.com.britenet.kta.service.UserService;
+import pl.com.britenet.kta.services.UserService;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.com.britenet.kta.dtos.RoleDto;
-import pl.com.britenet.kta.service.RoleService;
+import pl.com.britenet.kta.services.RoleService;
 
 import java.util.List;
 

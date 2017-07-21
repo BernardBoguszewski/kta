@@ -15,6 +15,16 @@ public class BeneficiaryDto {
     public BeneficiaryDto() {
     }
 
+    public BeneficiaryDto(String beneficiaryType, String firstName, String lastName, String address, String email, String phoneNumber, int hoursOfSupport) {
+        this.beneficiaryType = beneficiaryType;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.hoursOfSupport = hoursOfSupport;
+    }
+
     public String getBeneficiaryType() {
         return beneficiaryType;
     }

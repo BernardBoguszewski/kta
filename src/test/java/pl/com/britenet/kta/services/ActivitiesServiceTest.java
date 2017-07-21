@@ -73,4 +73,5 @@ public class ActivitiesServiceTest {
 
         verify(activitiesRepository).delete(correctId);
     }
+
 }

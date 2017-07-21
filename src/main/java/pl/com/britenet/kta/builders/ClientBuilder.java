@@ -8,7 +8,7 @@ import pl.com.britenet.kta.entity.crm.ContactType;
 @Component
 public class ClientBuilder {
 
-    public static Client create(ClientDto clientDto){
+    public Client create(ClientDto clientDto){
         String type = clientDto.getContactType().toUpperCase();
         ContactType contactType = ContactType.valueOf(clientDto.getContactType());
         return new Client(clientDto.getName(), clientDto.getAddress(), clientDto.getEmail(), clientDto.getPhoneNumber(), contactType);

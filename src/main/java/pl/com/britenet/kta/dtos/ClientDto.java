@@ -15,6 +15,14 @@ public class ClientDto {
     public ClientDto() {
     }
 
+    public ClientDto(String name, String address, String email, String phoneNumber, String contactType) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.contactType = contactType;
+    }
+
     public String getName() {
         return name;
     }

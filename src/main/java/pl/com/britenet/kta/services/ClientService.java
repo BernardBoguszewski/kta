@@ -15,14 +15,16 @@ import java.util.List;
 public class ClientService {
 
     private ClientRepository clientRepository;
+    private ClientBuilder clientBuilder;
 
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository, ClientBuilder clientBuilder) {
         this.clientRepository = clientRepository;
+        this.clientBuilder = clientBuilder;
     }
 
     @Transactional
     public void createClient(ClientDto clientDto) {
-        Client client = ClientBuilder.create(clientDto);
+        Client client = clientBuilder.create(clientDto);
         clientRepository.save(client);
     }
 

@@ -18,7 +18,7 @@ public class Contractor {
     private String email;
     private String phoneNumber;
 
-    private Set<Project> projects;
+    private Set<String> projectsIds;
 
     public Contractor() {
     }
@@ -32,15 +32,7 @@ public class Contractor {
         this.phoneNumber = phoneNumber;
     }
 
-    public Contractor(ContractorType contractorType, String firstName, String lastName, String address, String email, String phoneNumber, Set<Project> projects) {
-        this.contractorType = contractorType;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.projects = projects;
-    }
+
 
     public String getId() {
         return id;
@@ -98,11 +90,15 @@ public class Contractor {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Project> getProjects() {
-        return projects;
+    public Set<String> getProjectsIds() {
+        return projectsIds;
     }
 
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
+    public void setProjectsIds(Set<String> projectsIds) {
+        this.projectsIds = projectsIds;
+    }
+
+    public void addProjectId(String id){
+        projectsIds.add(id);
     }
 }

@@ -1,9 +1,7 @@
 package pl.com.britenet.kta.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import pl.com.britenet.kta.domain.Uchwala;
 import pl.com.britenet.kta.dtos.ResolutionDto;
-import pl.com.britenet.kta.dtos.UchwalaDto;
 import pl.com.britenet.kta.entity.resolution.Resolution;
 import pl.com.britenet.kta.services.ResolutionsService;
 

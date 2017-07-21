@@ -21,10 +21,9 @@ public class ProjectDto {
 //    private Note note; todo
 
     private Set<String> contractorsIds;
-
     private Set<String> beneficiariesIds;
 
-    private Set<String> taskIds;
+//    private Set<String> taskIds;
 
     public ProjectDto() {
     }
@@ -83,14 +82,6 @@ public class ProjectDto {
 
     public void setBeneficiariesIds(Set<String> beneficiariesIds) {
         this.beneficiariesIds = beneficiariesIds;
-    }
-
-    public Set<String> getTaskIds() {
-        return taskIds;
-    }
-
-    public void setTaskIds(Set<String> taskIds) {
-        this.taskIds = taskIds;
     }
 
     //    public void validate(){

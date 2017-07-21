@@ -1,5 +1,6 @@
 package pl.com.britenet.kta.services;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -9,12 +10,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import pl.com.britenet.kta.builders.ActivityBuilder;
 import pl.com.britenet.kta.dtos.ActivityDto;
 import pl.com.britenet.kta.entity.activities.Activity;
+import pl.com.britenet.kta.exceptions.BadRequestException;
 import pl.com.britenet.kta.repositories.ActivitiesRepository;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ActivitiesServiceTest {
@@ -22,29 +25,52 @@ public class ActivitiesServiceTest {
     @Mock
     private ActivitiesRepository activitiesRepository;
 
+    @Mock
+    private Activity activity;
 
-    private ActivityBuilder activityBuilder = new ActivityBuilder();
-
+    @Mock
+    private ActivityBuilder activityBuilder;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
-    private ActivitiesService activitiesService = new ActivitiesService(activitiesRepository, activityBuilder);
+    private ActivitiesService activitiesService;
+
+    private ActivityDto activityDto;
+
+    @Before
+    public void setUp() {
+        Set<String> contractors = new HashSet<>();
+        contractors.add("Jan Kowalski");
+        activityDto = new ActivityDto("title", "desc", "zajecia", contractors, "2017-07-07", 90);
+        activitiesService = new ActivitiesService(activitiesRepository, activityBuilder);
+    }
 
     @Test
     public void shouldCreateActivity() {
-        Set<String> contractors = new HashSet<>();
-        contractors.add("Jan Kowalski");
-        ActivityDto activityDto = new ActivityDto("title", "desc", "zajecia", contractors, "2017-07-07", 90);
+        when(activityBuilder.create(activityDto)).thenReturn(activity);
 
-        Activity activity = activityBuilder.create(activityDto);
         activitiesService.createActivity(activityDto);
 
         verify(activitiesRepository).save(activity);
     }
 
     @Test
-    public void shouldThrowExceptionWhenActivityDoesNotExist(){
+    public void shouldThrowExceptionWhenActivityDoesNotExist() {
+        String badId = "bad id";
+        exception.expect(BadRequestException.class);
+        when(activitiesRepository.findOne(badId)).thenReturn(null);
 
+        activitiesService.getActivity(badId);
+    }
+
+    @Test
+    public void shouldDeleteActivityIfExist(){
+        String correctId = "id";
+        when(activitiesRepository.findOne(correctId)).thenReturn(activity);
+
+        activitiesService.deleteActivity(correctId);
+
+        verify(activitiesRepository).delete(correctId);
     }
 }

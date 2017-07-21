@@ -17,11 +17,13 @@ public class Task {
     private Set<Contractor> contractors; //kto to? contractors wybierane z kadry - 1.3. Osoba/contractors przypisane do zadania
 
     private LocalDate createdDate;
-    private LocalDate finishDate; //dataZakonczenia
     private LocalDate startDate;
+    private LocalDate finishDate; //dataZakonczenia
     private LocalDate realizationDate; //dataRealizacji
 
     private TaskStatus status;
     private Note note;
     private Project project;
+
+
 }

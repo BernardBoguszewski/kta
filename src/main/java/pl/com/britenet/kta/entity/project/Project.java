@@ -37,6 +37,31 @@ public class Project {
     public Project() {
     }
 
+    public Project(String name, String description, LocalDate startDate, LocalDate endDate) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Project(String name, String description, LocalDate startDate, LocalDate endDate, ProjectStatus status) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+    }
+
+    public Project(String name, String description, LocalDate startDate, LocalDate endDate, ProjectStatus status, Set<Contractor> contractors, Set<Beneficiary> beneficiaries) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.contractors = contractors;
+        this.beneficiaries = beneficiaries;
+    }
+
     public Project(String name, String description, LocalDate startDate, LocalDate endDate, ProjectStatus status, Set<Contractor> contractors, Set<Beneficiary> beneficiaries, Set<Task> tasks) {
         this.name = name;
         this.description = description;

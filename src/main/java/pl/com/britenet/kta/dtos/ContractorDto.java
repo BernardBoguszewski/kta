@@ -14,6 +14,15 @@ public class ContractorDto {
     public ContractorDto() {
     }
 
+    public ContractorDto(String contractorType, String firstName, String lastName, String address, String email, String phoneNumber) {
+        this.contractorType = contractorType;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getContractorType() {
         return contractorType;
     }

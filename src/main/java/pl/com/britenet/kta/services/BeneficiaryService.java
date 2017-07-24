@@ -20,11 +20,16 @@ public class BeneficiaryService {
     }
 
     @Transactional
-    public void createBeneficiary(BeneficiaryDto beneficiaryDto) {
+    public BeneficiaryDto createBeneficiary(BeneficiaryDto beneficiaryDto) {
         Beneficiary beneficiary = new Beneficiary(BeneficiaryType.valueOf(beneficiaryDto.getBeneficiaryType()),
                 beneficiaryDto.getFirstName(), beneficiaryDto.getLastName(), beneficiaryDto.getAddress(),
                 beneficiaryDto.getEmail(), beneficiaryDto.getPhoneNumber(), beneficiaryDto.getHoursOfSupport());
-        beneficiaryRepository.save(beneficiary);
+        return mapToDto(beneficiaryRepository.save(beneficiary));
+    }
+
+    private BeneficiaryDto mapToDto(Beneficiary beneficiaryFromDb) {
+        return new BeneficiaryDto(beneficiaryFromDb.getId(), beneficiaryFromDb.getBeneficiaryType().toString(), beneficiaryFromDb.getFirstName(), beneficiaryFromDb.getLastName(),
+                beneficiaryFromDb.getAddress(), beneficiaryFromDb.getEmail(), beneficiaryFromDb.getPhoneNumber(), beneficiaryFromDb.getHoursOfSupport());
     }
 
     @Transactional

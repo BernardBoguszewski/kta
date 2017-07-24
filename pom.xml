@@ -27,6 +27,7 @@
         <gmavenplus-plugin.version>1.5</gmavenplus-plugin.version>
     </properties>
 
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -4,6 +4,7 @@ import pl.com.britenet.kta.exceptions.BadRequestException;
 
 public class BeneficiaryDto {
 
+    private String id;
     private String beneficiaryType; //OSOBA_Z_AUTYZMEM, OTOCZENIE
     private String firstName;
     private String lastName;
@@ -23,6 +24,25 @@ public class BeneficiaryDto {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.hoursOfSupport = hoursOfSupport;
+    }
+
+    public BeneficiaryDto(String id, String beneficiaryType, String firstName, String lastName, String address, String email, String phoneNumber, int hoursOfSupport) {
+        this.id = id;
+        this.beneficiaryType = beneficiaryType;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.hoursOfSupport = hoursOfSupport;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getBeneficiaryType() {

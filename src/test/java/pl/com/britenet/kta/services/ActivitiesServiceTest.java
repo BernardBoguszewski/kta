@@ -16,6 +16,8 @@ import pl.com.britenet.kta.repositories.ActivitiesRepository;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -50,9 +52,11 @@ public class ActivitiesServiceTest {
     public void shouldCreateActivity() {
         when(activityBuilder.create(activityDto)).thenReturn(activity);
 
-        activitiesService.createActivity(activityDto);
+        ActivityDto dtoToReturn = activitiesService.createActivity(activityDto);
 
-        verify(activitiesRepository).save(activity);
+        assertEquals(activityDto.getTitle(), dtoToReturn.getTitle());
+        assertEquals(activityDto.getDescription(), dtoToReturn.getDescription());
+        assertEquals(activityDto.getEndDate(), dtoToReturn.getEndDate());
     }
 
     @Test

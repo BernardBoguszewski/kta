@@ -18,9 +18,9 @@ public class BeneficiaryController {
     }
 
     @PostMapping
-    public void createBeneficiary(@RequestBody BeneficiaryDto beneficiaryDto){
+    public BeneficiaryDto createBeneficiary(@RequestBody BeneficiaryDto beneficiaryDto){
         beneficiaryDto.validate();
-        beneficiaryService.createBeneficiary(beneficiaryDto);
+        return beneficiaryService.createBeneficiary(beneficiaryDto);
     }
 
     @GetMapping

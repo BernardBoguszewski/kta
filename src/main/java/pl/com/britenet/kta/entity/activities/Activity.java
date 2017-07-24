@@ -18,7 +18,7 @@ public class Activity {
     private String title;
     private String description;
 
-    private ActivityDictionary activityDictionary;
+    private String activityDictionary;
     private Set<String> contractors; //osoby realizujace zadania - osoby wpisane z palca
 
     private LocalDate endDate; // data i godzina realizacji
@@ -28,7 +28,7 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String title, String description, ActivityDictionary activityDictionary, Set<String> contractors, LocalDate endDate, int amountOfTime) {
+    public Activity(String title, String description, String activityDictionary, Set<String> contractors, LocalDate endDate, int amountOfTime) {
         this.title = title;
         this.description = description;
         this.activityDictionary = activityDictionary;
@@ -61,11 +61,11 @@ public class Activity {
         this.description = description;
     }
 
-    public ActivityDictionary getActivityDictionary() {
+    public String getActivityDictionary() {
         return activityDictionary;
     }
 
-    public void setActivityDictionary(ActivityDictionary activityDictionary) {
+    public void setActivityDictionary(String activityDictionary) {
         this.activityDictionary = activityDictionary;
     }
 

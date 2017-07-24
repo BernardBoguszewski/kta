@@ -10,6 +10,7 @@ import pl.com.britenet.kta.exceptions.BadRequestException;
 import pl.com.britenet.kta.repositories.ActivitiesRepository;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -27,9 +28,18 @@ public class ActivitiesService {
     }
 
     @Transactional
-    public void createActivity(ActivityDto activityDto) {
+    public ActivityDto createActivity(ActivityDto activityDto) {
         Activity activity = activityBuilder.create(activityDto);
-        activitiesRepository.save(activity);
+        return mapToDto(activitiesRepository.save(activity));
+    }
+
+    private ActivityDto mapToDto(Activity activity) {
+        LocalDate endDate = activity.getEndDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        String endDateInString = endDate.format(formatter);
+        return new ActivityDto(activity.getId(), activity.getTitle(), activity.getDescription(),
+                activity.getActivityDictionary(), activity.getContractors(),
+                endDateInString, activity.getAmountOfTime());
     }
 
     @Transactional
@@ -38,28 +48,27 @@ public class ActivitiesService {
     }
 
     @Transactional
-    public Activity getActivity(String id) {
+    public ActivityDto getActivity(String id) {
         Activity activity = activitiesRepository.findOne(id);
         if(activity ==  null)
             throw new BadRequestException("activity does not exist");
         else
-            return activity;
+            return mapToDto(activity);
     }
 
     @Transactional
-    public void updateActivity(String id, ActivityDto activityDto) {
+    public ActivityDto updateActivity(String id, ActivityDto activityDto) {
         Activity activity = activitiesRepository.findOne(id);
         if(activity == null)
             throw new BadRequestException("Activity does not exist");
-        ActivityDictionary activityDictionary = new ActivityDictionary(activityDto.getActivityDictionary());
         LocalDate endDate = LocalDate.parse(activityDto.getEndDate());
         activity.setTitle(activityDto.getTitle());
         activity.setDescription(activityDto.getDescription());
-        activity.setActivityDictionary(activityDictionary);
+        activity.setActivityDictionary(activityDto.getActivityDictionary());
         activity.setContractors(activityDto.getContractors());
         activity.setEndDate(endDate);
         activity.setAmountOfTime(activityDto.getAmountOfTime());
-        activitiesRepository.save(activity);
+        return mapToDto(activitiesRepository.save(activity));
     }
 
     @Transactional

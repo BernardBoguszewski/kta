@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class ActivityDto {
 
+    private String id;
     private String title;
     private String description;
     private String activityDictionary;
@@ -28,6 +29,24 @@ public class ActivityDto {
         this.contractors = contractors;
         this.endDate = endDate;
         this.amountOfTime = amountOfTime;
+    }
+
+    public ActivityDto(String id, String title, String description, String activityDictionary, Set<String> contractors, String endDate, int amountOfTime) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.activityDictionary = activityDictionary;
+        this.contractors = contractors;
+        this.endDate = endDate;
+        this.amountOfTime = amountOfTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

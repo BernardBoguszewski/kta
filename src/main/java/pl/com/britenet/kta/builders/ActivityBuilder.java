@@ -14,8 +14,7 @@ import java.time.LocalDate;
 public class ActivityBuilder {
 
     public Activity create(ActivityDto activityDto){
-        ActivityDictionary activityDictionary = new ActivityDictionary(activityDto.getActivityDictionary());
         LocalDate endDate = LocalDate.parse(activityDto.getEndDate());
-        return new Activity(activityDto.getTitle(), activityDto.getDescription(), activityDictionary, activityDto.getContractors(), endDate, activityDto.getAmountOfTime());
+        return new Activity(activityDto.getTitle(), activityDto.getDescription(), activityDto.getActivityDictionary(), activityDto.getContractors(), endDate, activityDto.getAmountOfTime());
     }
 }

@@ -12,6 +12,9 @@ public class ActivityDictionary {
         this.name = name;
     }
 
+    public ActivityDictionary() {
+    }
+
     public String getName() {
         return name;
     }

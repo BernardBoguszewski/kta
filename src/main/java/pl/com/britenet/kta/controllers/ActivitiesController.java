@@ -21,9 +21,9 @@ public class ActivitiesController {
     }
 
     @PostMapping
-    public void createActivity(@RequestBody ActivityDto activityDto){
+    public ActivityDto createActivity(@RequestBody ActivityDto activityDto){
         activityDto.validate();
-        activitiesService.createActivity(activityDto);
+        return activitiesService.createActivity(activityDto);
     }
 
     @GetMapping
@@ -32,14 +32,14 @@ public class ActivitiesController {
     }
 
     @GetMapping("/{id}")
-    public Activity getActivity(@PathVariable String id){
+    public ActivityDto getActivity(@PathVariable String id){
         return activitiesService.getActivity(id);
     }
 
     @PutMapping("/{id}")
-    public void updateActivity(@PathVariable String id, @RequestBody ActivityDto activityDto){
+    public ActivityDto updateActivity(@PathVariable String id, @RequestBody ActivityDto activityDto){
         activityDto.validate();
-        activitiesService.updateActivity(id, activityDto);
+        return activitiesService.updateActivity(id, activityDto);
     }
 
     @DeleteMapping("/{id}")

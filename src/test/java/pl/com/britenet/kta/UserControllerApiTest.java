@@ -113,8 +113,8 @@ public class UserControllerApiTest {
                 .build();
 
         RequestEntity<UserDto> requestEntity = new RequestEntity<>(user, httpHeaders, HttpMethod.POST, new URI(appPath + "users"));
-        ResponseEntity<UserDto> exchange = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<UserDto>() {
-        });
+        //ResponseEntity<UserDto> exchange = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<UserDto>() {
+        //});
     }
 
     private RoleDto getRoleDto(RoleType roleType, HttpHeaders httpHeaders) throws URISyntaxException {

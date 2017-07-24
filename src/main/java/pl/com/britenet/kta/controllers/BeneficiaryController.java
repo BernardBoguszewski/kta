@@ -34,9 +34,9 @@ public class BeneficiaryController {
     }
 
     @PutMapping("/{id}")
-    public void updateBeneficiary(@PathVariable String id, @RequestBody BeneficiaryDto beneficiaryDto){
+    public BeneficiaryDto updateBeneficiary(@PathVariable String id, @RequestBody BeneficiaryDto beneficiaryDto){
         beneficiaryDto.validate();
-        beneficiaryService.updateBeneficiary(id, beneficiaryDto);
+        return beneficiaryService.updateBeneficiary(id, beneficiaryDto);
     }
 
     @DeleteMapping("/{id}")

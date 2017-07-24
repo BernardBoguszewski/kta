@@ -2,6 +2,7 @@ package pl.com.britenet.kta;
 
 import org.junit.Test;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -46,4 +47,29 @@ public class BeneficiaryControllerApiTest {
         assertEquals(beneficiaryDto.getBeneficiaryType(), beneficiaryDtoFromDb.getBeneficiaryType());
         assertEquals(beneficiaryDto.getHoursOfSupport(), beneficiaryDtoFromDb.getHoursOfSupport());
     }
+
+    @Test
+    public void getBeneficiaryById() throws URISyntaxException{
+        HttpHeaders httpHeaders = TestUtils.httpHeaders();
+        BeneficiaryDto beneficiaryDto = new BeneficiaryDto("OTOCZENIE", "John", "Porter", "adres", "email@mail.com", "123456789", 90);
+        RequestEntity requestEntity = new RequestEntity<>(beneficiaryDto, TestUtils.httpHeaders(), HttpMethod.POST, new URI(appPath + "beneficiaries"));
+        ResponseEntity<BeneficiaryDto> responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<BeneficiaryDto>() {
+        });
+        assertEquals(200, responseEntity.getStatusCodeValue());
+        String oldBeneficiaryDtoId = responseEntity.getBody().getId();
+
+        BeneficiaryDto newBeneficiaryDto = new BeneficiaryDto("OSOBA_Z_AUTYZMEM", "Johnny", "Portero", "adres", "email@mail.com", "987654321", 60);
+        requestEntity = new RequestEntity<>(newBeneficiaryDto, TestUtils.httpHeaders(), HttpMethod.PUT, new URI(appPath + "beneficiaries/" + responseEntity.getBody().getId()));
+        responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<BeneficiaryDto>() {
+        });
+        assertEquals(200, responseEntity.getStatusCodeValue());
+
+        BeneficiaryDto updatedBeneficiaryDto = responseEntity.getBody();
+        assertEquals(oldBeneficiaryDtoId, updatedBeneficiaryDto.getId());
+        assertEquals(newBeneficiaryDto.getFirstName(), updatedBeneficiaryDto.getFirstName());
+        assertEquals(newBeneficiaryDto.getBeneficiaryType(), updatedBeneficiaryDto.getBeneficiaryType());
+        assertEquals(newBeneficiaryDto.getHoursOfSupport(), updatedBeneficiaryDto.getHoursOfSupport());
+        assertEquals(newBeneficiaryDto.getAddress(), updatedBeneficiaryDto.getAddress());
+    }
+
 }

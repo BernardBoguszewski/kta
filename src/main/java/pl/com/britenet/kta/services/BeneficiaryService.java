@@ -46,7 +46,7 @@ public class BeneficiaryService {
     }
 
     @Transactional
-    public void updateBeneficiary(String id, BeneficiaryDto beneficiaryDto) {
+    public BeneficiaryDto updateBeneficiary(String id, BeneficiaryDto beneficiaryDto) {
         Beneficiary beneficiary = beneficiaryRepository.findOne(id);
         if (beneficiary == null)
             throw new BadRequestException("beneficiary not found");
@@ -57,7 +57,7 @@ public class BeneficiaryService {
         beneficiary.setEmail(beneficiaryDto.getEmail());
         beneficiary.setPhoneNumber(beneficiaryDto.getPhoneNumber());
         beneficiary.setHoursOfSupport(beneficiaryDto.getHoursOfSupport());
-        beneficiaryRepository.save(beneficiary);
+        return mapToDto(beneficiaryRepository.save(beneficiary));
     }
 
     @Transactional

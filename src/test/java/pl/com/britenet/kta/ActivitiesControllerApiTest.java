@@ -1,15 +1,16 @@
 package pl.com.britenet.kta;
 
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-import pl.com.britenet.kta.dto.user.UserDto;
 import pl.com.britenet.kta.dtos.ActivityDto;
 import pl.com.britenet.kta.entity.activities.Activity;
 
@@ -20,8 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class ActivitiesControllerApiTest {
 
@@ -37,6 +37,9 @@ public class ActivitiesControllerApiTest {
             set("Authorization", authHeader);
         }};
     }
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void getAllActivities() throws URISyntaxException{
@@ -133,6 +136,18 @@ public class ActivitiesControllerApiTest {
         responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<ActivityDto>() {
         });
         assertEquals(200, responseEntity.getStatusCodeValue());
+    }
+
+    @Test
+    public void throwExceptionIfActivityDoesNotExist() throws URISyntaxException{
+        HttpHeaders httpHeaders = httpHeaders();
+        exception.expect(HttpServerErrorException.class);
+        RequestEntity requestEntity = new RequestEntity<>(httpHeaders, HttpMethod.GET, new URI(appPath + "activities/" + "incorrectId"));
+        ResponseEntity<ActivityDto> responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<ActivityDto>() {
+        });
+
+        assertEquals(500, responseEntity.getStatusCodeValue());
+        assertTrue(responseEntity.toString().contains("Activity does not exist"));
     }
 
 }

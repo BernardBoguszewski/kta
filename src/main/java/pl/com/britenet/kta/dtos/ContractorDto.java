@@ -4,6 +4,7 @@ import pl.com.britenet.kta.exceptions.BadRequestException;
 
 public class ContractorDto {
 
+    private String id;
     private String contractorType;
     private String firstName;
     private String lastName;
@@ -14,6 +15,16 @@ public class ContractorDto {
     public ContractorDto() {
     }
 
+    public ContractorDto(String id, String contractorType, String firstName, String lastName, String address, String email, String phoneNumber) {
+        this.id = id;
+        this.contractorType = contractorType;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public ContractorDto(String contractorType, String firstName, String lastName, String address, String email, String phoneNumber) {
         this.contractorType = contractorType;
         this.firstName = firstName;
@@ -21,6 +32,14 @@ public class ContractorDto {
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getContractorType() {

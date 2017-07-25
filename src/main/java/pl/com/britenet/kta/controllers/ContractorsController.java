@@ -21,9 +21,9 @@ public class ContractorsController {
     }
 
     @PostMapping
-    public void createContractor(@RequestBody ContractorDto contractorDto){
+    public ContractorDto createContractor(@RequestBody ContractorDto contractorDto){
         contractorDto.validate();
-        contractorsService.createContractor(contractorDto);
+        return contractorsService.createContractor(contractorDto);
     }
 
     @GetMapping
@@ -37,9 +37,9 @@ public class ContractorsController {
     }
 
     @PutMapping("/{id}")
-    public void updateContractor(@PathVariable String id, @RequestBody ContractorDto contractorDto){
+    public ContractorDto updateContractor(@PathVariable String id, @RequestBody ContractorDto contractorDto){
         contractorDto.validate();
-        contractorsService.updateContractor(id, contractorDto);
+        return contractorsService.updateContractor(id, contractorDto);
     }
 
     @DeleteMapping("/{id}")

@@ -20,10 +20,15 @@ public class ContractorsService {
     }
 
     @Transactional
-    public void createContractor(ContractorDto contractorDto) {
+    public ContractorDto createContractor(ContractorDto contractorDto) {
         Contractor contractor = new Contractor(ContractorType.valueOf(contractorDto.getContractorType()),
                 contractorDto.getFirstName(), contractorDto.getLastName(), contractorDto.getAddress(), contractorDto.getEmail(), contractorDto.getPhoneNumber());
-        contractorsRepository.save(contractor);
+        return mapToDto(contractorsRepository.save(contractor));
+    }
+
+    private ContractorDto mapToDto(Contractor contractor) {
+        return new ContractorDto(contractor.getId(), contractor.getContractorType().toString(), contractor.getFirstName(),
+                contractor.getLastName(), contractor.getAddress(), contractor.getEmail(), contractor.getPhoneNumber());
     }
 
     @Transactional
@@ -40,7 +45,7 @@ public class ContractorsService {
     }
 
     @Transactional
-    public void updateContractor(String id, ContractorDto contractorDto) {
+    public ContractorDto updateContractor(String id, ContractorDto contractorDto) {
         Contractor contractor = contractorsRepository.findOne(id);
         if (contractor == null)
             throw new BadRequestException("Contractor not found");
@@ -50,7 +55,7 @@ public class ContractorsService {
         contractor.setAddress(contractorDto.getAddress());
         contractor.setEmail(contractorDto.getEmail());
         contractorDto.setPhoneNumber(contractorDto.getPhoneNumber());
-        contractorsRepository.save(contractor);
+        return mapToDto(contractorsRepository.save(contractor));
     }
 
     @Transactional

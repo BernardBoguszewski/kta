@@ -65,7 +65,7 @@ public class ClientServiceTest {
     public void shouldFindClientIfExist() {
         when(clientRepository.findOne(goodId)).thenReturn(client);
 
-        Client clientReturned = clientService.getClient(goodId);
+        ClientDto clientReturned = clientService.getClient(goodId);
 
         assertEquals(client.getId(), clientReturned.getId());
     }

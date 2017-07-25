@@ -23,9 +23,14 @@ public class ClientService {
     }
 
     @Transactional
-    public void createClient(ClientDto clientDto) {
+    public ClientDto createClient(ClientDto clientDto) {
         Client client = clientBuilder.create(clientDto);
-        clientRepository.save(client);
+        return mapToDto(clientRepository.save(client));
+    }
+
+    private ClientDto mapToDto(Client client) {
+        return new ClientDto(client.getId(), client.getName(), client.getAddress(), client.getEmail(),
+                client.getPhoneNumber(), client.getContactType().toString());
     }
 
     @Transactional
@@ -34,16 +39,16 @@ public class ClientService {
     }
 
     @Transactional
-    public Client getClient(String id) {
+    public ClientDto getClient(String id) {
         Client client = clientRepository.findOne(id);
         if (client ==  null)
             throw new BadRequestException("Client does not exist");
         else
-            return client;
+            return mapToDto(client);
     }
 
     @Transactional
-    public void updateClient(String id, ClientDto clientDto) {
+    public ClientDto updateClient(String id, ClientDto clientDto) {
         Client client = clientRepository.findOne(id);
         if (client ==  null)
             throw new BadRequestException("Client does not exist");
@@ -54,7 +59,7 @@ public class ClientService {
             client.setPhoneNumber(clientDto.getPhoneNumber());
             ContactType contactType = ContactType.valueOf(clientDto.getContactType());
             client.setContactType(contactType);
-            clientRepository.save(client);
+            return mapToDto(clientRepository.save(client));
         }
     }
 

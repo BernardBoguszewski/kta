@@ -21,9 +21,9 @@ public class ClientsController {
     }
 
     @PostMapping
-    public void createClient(@RequestBody ClientDto clientDto){
+    public ClientDto createClient(@RequestBody ClientDto clientDto){
         clientDto.validate();
-        clientService.createClient(clientDto);
+        return clientService.createClient(clientDto);
     }
 
     @GetMapping
@@ -32,14 +32,14 @@ public class ClientsController {
     }
 
     @GetMapping("/{id}")
-    public Client getClient(@PathVariable String id){
+    public ClientDto getClient(@PathVariable String id){
         return clientService.getClient(id);
     }
 
     @PutMapping("/{id}")
-    public void updateClient(@PathVariable String id, @RequestBody ClientDto clientDto){
+    public ClientDto updateClient(@PathVariable String id, @RequestBody ClientDto clientDto){
         clientDto.validate();
-        clientService.updateClient(id, clientDto);
+        return clientService.updateClient(id, clientDto);
     }
 
     @DeleteMapping("/{id}")

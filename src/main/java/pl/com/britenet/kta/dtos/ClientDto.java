@@ -6,6 +6,7 @@ import pl.com.britenet.kta.exceptions.BadRequestException;
 
 public class ClientDto {
 
+    private String id;
     private String name;
     private String address;
     private String email;
@@ -15,12 +16,29 @@ public class ClientDto {
     public ClientDto() {
     }
 
+    public ClientDto(String id, String name, String address, String email, String phoneNumber, String contactType) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.contactType = contactType;
+    }
+
     public ClientDto(String name, String address, String email, String phoneNumber, String contactType) {
         this.name = name;
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.contactType = contactType;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

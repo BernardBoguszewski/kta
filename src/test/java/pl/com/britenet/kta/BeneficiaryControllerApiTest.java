@@ -1,11 +1,14 @@
 package pl.com.britenet.kta;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import pl.com.britenet.kta.dtos.BeneficiaryDto;
 import pl.com.britenet.kta.entity.project.Beneficiary;
@@ -21,6 +24,9 @@ public class BeneficiaryControllerApiTest {
 
     private RestTemplate restTemplate = new RestTemplate();
     private String appPath = "http://localhost:8080/";
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void getAllBeneficiaries() throws URISyntaxException{
@@ -49,7 +55,7 @@ public class BeneficiaryControllerApiTest {
     }
 
     @Test
-    public void getBeneficiaryById() throws URISyntaxException{
+    public void updateBeneficiary() throws URISyntaxException{
         HttpHeaders httpHeaders = TestUtils.httpHeaders();
         BeneficiaryDto beneficiaryDto = new BeneficiaryDto("OTOCZENIE", "John", "Porter", "adres", "email@mail.com", "123456789", 90);
         RequestEntity requestEntity = new RequestEntity<>(beneficiaryDto, TestUtils.httpHeaders(), HttpMethod.POST, new URI(appPath + "beneficiaries"));
@@ -70,6 +76,57 @@ public class BeneficiaryControllerApiTest {
         assertEquals(newBeneficiaryDto.getBeneficiaryType(), updatedBeneficiaryDto.getBeneficiaryType());
         assertEquals(newBeneficiaryDto.getHoursOfSupport(), updatedBeneficiaryDto.getHoursOfSupport());
         assertEquals(newBeneficiaryDto.getAddress(), updatedBeneficiaryDto.getAddress());
+    }
+
+    @Test
+    public void getBeneficiaryById() throws URISyntaxException {
+        HttpHeaders httpHeaders = TestUtils.httpHeaders();
+        BeneficiaryDto beneficiaryDto = new BeneficiaryDto("OTOCZENIE", "John", "Porter", "adres", "email@mail.com", "123456789", 90);
+        RequestEntity requestEntity = new RequestEntity<>(beneficiaryDto, TestUtils.httpHeaders(), HttpMethod.POST, new URI(appPath + "beneficiaries"));
+        ResponseEntity<BeneficiaryDto> responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<BeneficiaryDto>() {
+        });
+        assertEquals(200, responseEntity.getStatusCodeValue());
+        String beneficiaryDtoId = responseEntity.getBody().getId();
+
+
+        requestEntity = new RequestEntity<>(httpHeaders, HttpMethod.GET, new URI(appPath + "beneficiaries/" + responseEntity.getBody().getId()));
+        responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<BeneficiaryDto>() {
+        });
+        assertEquals(200, responseEntity.getStatusCodeValue());
+
+        BeneficiaryDto beneficiaryDtoFromDb = responseEntity.getBody();
+        assertEquals(beneficiaryDtoId, beneficiaryDtoFromDb.getId());
+        assertEquals(beneficiaryDto.getFirstName(), beneficiaryDtoFromDb.getFirstName());
+        assertEquals(beneficiaryDto.getBeneficiaryType(), beneficiaryDtoFromDb.getBeneficiaryType());
+        assertEquals(beneficiaryDto.getHoursOfSupport(), beneficiaryDtoFromDb.getHoursOfSupport());
+        assertEquals(beneficiaryDto.getAddress(), beneficiaryDtoFromDb.getAddress());
+    }
+
+    @Test
+    public void deleteBeneficiary() throws URISyntaxException {
+        HttpHeaders httpHeaders = TestUtils.httpHeaders();
+        BeneficiaryDto beneficiaryDto = new BeneficiaryDto("OTOCZENIE", "John", "Porter", "adres", "email@mail.com", "123456789", 90);
+        RequestEntity requestEntity = new RequestEntity<>(beneficiaryDto, TestUtils.httpHeaders(), HttpMethod.POST, new URI(appPath + "beneficiaries"));
+        ResponseEntity<BeneficiaryDto> responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<BeneficiaryDto>() {
+        });
+        assertEquals(200, responseEntity.getStatusCodeValue());
+        String beneficiaryDtoId = responseEntity.getBody().getId();
+
+
+        requestEntity = new RequestEntity<>(httpHeaders, HttpMethod.DELETE, new URI(appPath + "beneficiaries/" + responseEntity.getBody().getId()));
+        responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<BeneficiaryDto>() {
+        });
+        assertEquals(200, responseEntity.getStatusCodeValue());
+    }
+
+    @Test
+    public void throwExceptionIfBeneficiaryDoesNotExist() throws URISyntaxException {
+        HttpHeaders httpHeaders = TestUtils.httpHeaders();
+        exception.expect(HttpServerErrorException.class);
+
+        RequestEntity requestEntity = new RequestEntity<>(httpHeaders, HttpMethod.GET, new URI(appPath + "beneficiaries/" + "incorrectId"));
+        ResponseEntity<BeneficiaryDto> responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<BeneficiaryDto>() {
+        });
     }
 
 }
